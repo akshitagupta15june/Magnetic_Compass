@@ -1,7 +1,7 @@
 # Magnetic_Compass
 magnetic compass accelerometer sensor android app with geolocation
 
-Final Video
+Final Video -> click on the picture to see final video in youtube
 
 [![Everything Is AWESOME](https://github.com/akshitagupta15june/Magnetic_Compass/blob/master/COMPASS.jpg)](
 https://youtu.be/yvJKccm3g1E "Everything Is AWESOME")
