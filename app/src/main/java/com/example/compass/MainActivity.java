@@ -17,26 +17,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
-    private static final String TAG="MainActivity";
+    private static final String TAG = "MainActivity";
     private Compass compass;
     private ImageView dial;
     private ImageView hand;
     private TextView label;
-    private  float currentAzimuth;
-    private TextView geo;
+    private float currentAzimuth;
+    private TextView longitude, latitude;
     private LocationManager locationManager;
-    private  SOWTFormatter sowtFormatter;
+    private SOWTFormatter sowtFormatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sowtFormatter=new SOWTFormatter(this);
-        label=findViewById(R.id.label);
-        geo=findViewById(R.id.geo);
-        dial=findViewById(R.id.dial);
-        hand=findViewById(R.id.hand);
-        locationManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        sowtFormatter = new SOWTFormatter(this);
+        label = findViewById(R.id.label);
+        latitude = findViewById(R.id.latitudeValue);
+        longitude = findViewById(R.id.longitudeValue);
+        dial = findViewById(R.id.dial);
+        hand = findViewById(R.id.hand);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d(TAG,"start compass");
+        Log.d(TAG, "start compass");
         compass.start();
     }
 
@@ -68,27 +69,29 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(TAG,"stop compass");
+        Log.d(TAG, "stop compass");
         compass.stop();
     }
 
     private void setupCompass() {
 
-        compass=new Compass(this);
-        Compass.CompassListener cl=getCompassListener();
+        compass = new Compass(this);
+        Compass.CompassListener cl = getCompassListener();
         compass.setListener(cl);
     }
-    private void adjustArrow(float azimuth){
-        Log.d(TAG,"will set rotation from "+currentAzimuth +" to "+azimuth);
-        Animation an=new RotateAnimation(-currentAzimuth,-azimuth,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
-        currentAzimuth=azimuth;
+
+    private void adjustArrow(float azimuth) {
+        Log.d(TAG, "will set rotation from " + currentAzimuth + " to " + azimuth);
+        Animation an = new RotateAnimation(-currentAzimuth, -azimuth, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        currentAzimuth = azimuth;
         an.setDuration(500);
         an.setRepeatCount(0);
         an.setFillAfter(true);
         hand.startAnimation(an);
 
     }
-    private void  adjustSotwLabel(float azimuth){
+
+    private void adjustSotwLabel(float azimuth) {
         label.setText(sowtFormatter.format(azimuth));
     }
 
@@ -110,9 +113,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     @Override
     public void onLocationChanged(Location location) {
-        double longitude=location.getLongitude();
-        double lattitude=location.getLatitude();
-        geo.setText("longitude: " + longitude + "\n" + "latitude: " + lattitude);
+        double longitude = location.getLongitude();
+        double lattitude = location.getLatitude();
+        this.longitude.setText(String.format("%s", longitude));
+        this.latitude.setText(String.format("%s", lattitude));
 
     }
 
