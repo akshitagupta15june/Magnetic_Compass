@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:paddingLeft="64dp"
-    android:paddingRight="64dp"
-    android:paddingBottom="16dp"
-    android:paddingTop="16dp"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
@@ -14,44 +10,108 @@
         android:id="@+id/tex1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="AKSHITA COMPASS"
-        android:textColor="#040303"
-        android:textSize="25dp"
-        android:textStyle="bold" />
+        android:layout_marginTop="64dp"
+        android:text="@string/akshita_compass"
+        android:textColor="@color/textColor"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
+        android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/label"
         android:layout_below="@+id/tex1"
-        android:text="  "
+        android:layout_marginTop="16dp"
+        android:textColor="@color/textColor"
+        android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="#040303"
-        android:textSize="30dp"/>
+        app:layout_constraintEnd_toEndOf="@+id/tex1"
+        app:layout_constraintStart_toStartOf="@+id/tex1"
+        app:layout_constraintTop_toBottomOf="@+id/tex1" />
+
     <ImageView
+        android:id="@+id/dial"
         android:layout_width="320dp"
         android:layout_height="320dp"
-        android:id="@+id/dial"
         android:layout_centerInParent="true"
+        android:contentDescription="@string/compass_dial"
         android:src="@drawable/dial"
-        android:contentDescription="@string/compass_dial"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
+        android:id="@+id/hand"
         android:layout_width="20dp"
         android:layout_height="240dp"
         android:layout_centerInParent="true"
-        android:id="@+id/hand"
         android:contentDescription="@string/compass_hands"
+        android:scaleType="fitXY"
         android:src="@drawable/hands"
-        android:scaleType="fitXY"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/geo"
+        android:id="@+id/longitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/label"
-        android:layout_marginTop="50dp"
-        android:textSize="20dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/longitude"
+        android:textColor="@color/textColor"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="#040303"
-        android:text="Geolocation" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/latitude"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dial">
 
-</RelativeLayout>
+    </TextView>
+
+    <TextView
+        android:id="@+id/longitudeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textColor="@color/textColor"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/longitude"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/longitude"
+        app:layout_constraintTop_toBottomOf="@+id/longitude" />
+
+    <TextView
+        android:id="@+id/latitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/latitude"
+        android:textColor="@color/textColor"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/longitude"
+        app:layout_constraintTop_toBottomOf="@+id/dial">
+    </TextView>
+
+    <TextView
+        android:id="@+id/latitudeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textColor="@color/textColor"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/latitude"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/latitude"
+        app:layout_constraintTop_toBottomOf="@+id/latitude" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
